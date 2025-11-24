@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 20px;
+    }
+    .box {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .btn {
+      background: #1d3557;
+      color: white;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    .btn:hover { background: #457b9d; }
+  </style>
+</head>
+<body>
+
+<h1 style="text-align:center;">Checkout</h1>
+
+<div class="box">
+
+  <h3>Customer Details</h3>
+
+  <label>Full Name</label>
+  <input type="text" id="name" required>
+
+  <label>Phone Number</label>
+  <input type="text" id="phone" required>
+
+  <label>Address</label>
+  <textarea id="address" rows="3" required></textarea>
+
+  <h3>Order Summary</h3>
+  <div id="order-items"></div>
+  <h3 id="order-total"></h3>
+
+  <button class="btn" onclick="submitOrder()">Confirm Order</button>
+
+</div>
+
+<script>
+function loadOrder() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const itemsDiv = document.getElementById("order-items");
+  const totalEl = document.getElementById("order-total");
+
+  let total = 0;
+  itemsDiv.innerHTML = "";
+
+  cart.forEach(item => {
+    const price = parseFloat(item.price.replace("$", ""));
+    total += price;
+
+    itemsDiv.innerHTML += `
+      <p><strong>${item.title}</strong> — ${item.price}</p>
+    `;
+  });
+
+  totalEl.textContent = "Total: $" + total.toFixed(2);
+}
+
+function submitOrder() {
+  let name = document.getElementById("name").value.trim();
+  let phone = document.getElementById("phone").value.trim();
+  let address = document.getElementById("address").value.trim();
+
+  if (!name || !phone || !address) {
+    alert("Please fill all fields!");
+    return;
+  }
+
+  // Save order info (optional)
+  const orderInfo = {
+    name,
+    phone,
+    address,
+    cart: JSON.parse(localStorage.getItem("cart")) || []
+  };
+
+  localStorage.setItem("orderInfo", JSON.stringify(orderInfo));
+
+  // Clear cart
+  localStorage.removeItem("cart");
+
+  alert("Order Confirmed! Thank you.");
+  window.location.href = "index.html"; // redirect home
+}
+
+loadOrder();
+</script>
+
+</body>
+</html>

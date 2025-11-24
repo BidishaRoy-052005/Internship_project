@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Quiz</title>
+
+  <style>
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      background: linear-gradient(135deg, #5cd2b9, #2b5876);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .quiz-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 35px;
+      border-radius: 18px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .progress-container {
+      width: 100%;
+      background: #ddd;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 10px;
+      width: 0%;
+      background: #28a745;
+      transition: width 0.4s ease;
+    }
+
+    .answer-btn {
+      background: #009999;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      width: 100%;
+      border-radius: 8px;
+      margin: 8px 0;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .answer-btn:hover {
+      background: #00b7b7;
+    }
+
+    .answer-btn.correct {
+      background: #28a745 !important;
+      color: white;
+    }
+
+    .answer-btn.wrong {
+      background: #dc3545 !important;
+      color: white;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    #next-btn {
+      background: #005f73;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      color: white;
+      border: none;
+      margin-top: 20px;
+      display: none;
+      cursor: pointer;
+    }
+
+    #next-btn:hover {
+      background: #007f93;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="quiz-container">
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progress"></div>
+    </div>
+
+    <h2 id="question">Loading question...</h2>
+    <div id="answers"></div>
+
+    <button id="next-btn">Next</button>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        question: "What does HTML stand for?",
+        answers: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks and Text Markup Language"],
+        correct: 0
+      },
+      {
+        question: "What does CSS control?",
+        answers: ["Database storage", "Website styling", "Server configuration"],
+        correct: 1
+      },
+      {
+        question: "Which language adds interactivity to websites?",
+        answers: ["Python", "JavaScript", "PHP"],
+        correct: 1
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+    const nextBtn = document.getElementById("next-btn");
+    const progress = document.getElementById("progress");
+
+    function updateProgress() {
+      progress.style.width = (currentQuestion / quizData.length) * 100 + "%";
+    }
+
+    function loadQuestion() {
+      updateProgress();
+
+      const q = quizData[currentQuestion];
+      questionEl.textContent = q.question;
+      answersEl.innerHTML = "";
+      nextBtn.style.display = "none";
+
+      q.answers.forEach((ans, index) => {
+        const btn = document.createElement("button");
+        btn.textContent = ans;
+        btn.classList.add("answer-btn");
+        btn.addEventListener("click", () => checkAnswer(btn, index));
+        answersEl.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selectedBtn, index) {
+      const correct = quizData[currentQuestion].correct;
+      const buttons = document.querySelectorAll(".answer-btn");
+
+      buttons.forEach(btn => btn.disabled = true);
+
+      if (index === correct) {
+        selectedBtn.classList.add("correct");
+        score++;
+      } else {
+        selectedBtn.classList.add("wrong");
+        buttons[correct].classList.add("correct");
+      }
+
+      nextBtn.style.display = "block";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      currentQuestion++;
+
+      if (currentQuestion < quizData.length) {
+        loadQuestion();
+      } else {
+        progress.style.width = "100%";
+        questionEl.textContent = ` Finished! Score: ${score}/${quizData.length}`;
+        answersEl.innerHTML = "";
+        nextBtn.style.display = "none";
+      }
+    });
+
+    loadQuestion();
+  </script>
+
+</body>
+</html>

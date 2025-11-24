@@ -1,0 +1,156 @@
+/* GLOBAL STYLES */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
+
+/* MAIN CONTAINER */
+.wrapper {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  animation: fadeIn 0.8s ease-in;
+}
+
+.todo-container h1 {
+  text-align: center;
+  color: #444;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.todo-container h1::after {
+  content: "";
+  width: 60px;
+  height: 3px;
+  background: #667eea;
+  display: block;
+  margin: 8px auto 0;
+  border-radius: 3px;
+}
+
+/* INPUT SECTION */
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+#taskInput {
+  flex: 1;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  outline: none;
+  transition: all 0.3s;
+  font-size: 15px;
+}
+
+#taskInput:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 5px rgba(102, 126, 234, 0.4);
+}
+
+#addBtn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#addBtn:hover {
+  background: #090125;
+  transform: translateY(-2px);
+}
+
+/* TASK LIST */
+ul {
+  list-style-type: none;
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Scrollbar style */
+ul::-webkit-scrollbar {
+  width: 6px;
+}
+ul::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 4px;
+}
+
+li {
+  background: #f7f7f7;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+li:hover {
+  background: #eef0ff;
+  transform: scale(1.02);
+}
+
+li.completed {
+  text-decoration: line-through;
+  background: #d4f1d4;
+  color: #666;
+}
+
+li span.task-text {
+  flex: 1;
+}
+
+/* DELETE BUTTON */
+button.delete {
+  background: #ff6b6b;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+button.delete:hover {
+  background: #e64545;
+  transform: rotate(10deg);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

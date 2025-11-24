@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Webpage</title>
+
+    <!-- UPDATED & ENHANCED CSS -->
+    <style>
+        /* General Page Style */
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #e8f5e9);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #221e28;
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        nav .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header Area */
+        header {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            background: #510347;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        img {
+            width: 300px;
+            border-radius: 12px;
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        a {
+            color: #042f40;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* Improved Button */
+        button {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1b5e20;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">My Webpage</div>
+        <div>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Welcome to My Webpage</h1>
+        <p>Styled with enhanced CSS & animations</p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2>About This Page</h2>
+        <p>This webpage demonstrates an improved layout, styling, and interactive elements using HTML, CSS, and JavaScript.</p>
+
+        <h3>Sample Image</h3>
+        <img src="box1_image2.jpg" alt="Sample Image">
+
+        <h3>A Useful Link</h3>
+        <p>Visit <a href="https://www.google.com/" target="_blank">Explore more..</a> for more information.</p>
+
+        <!-- JavaScript Button -->
+        <button onclick="showMessage()">Click Me!</button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function showMessage() {
+            alert("Hi ! You clicked the button!");
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Product Store</title>
+  <link rel="stylesheet" href="style3.css" />
+</head>
+<body>
+  <header>
+    <h1> New Product Store</h1>
+    <p>Find your favorite products — filter, sort & shop smart!</p>
+  </header>
+
+  <section class="controls">
+    <div class="filter-group">
+      <label for="categoryFilter">Category:</label>
+      <select id="categoryFilter">
+        <option value="all">All</option>
+        <option value="electronics">Electronics</option>
+        <option value="fashion">Fashion</option>
+        <option value="home">Home</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="priceFilter">Price:</label>
+      <select id="priceFilter">
+        <option value="all">All</option>
+        <option value="low">Under 100</option>
+        <option value="medium">100 - 200</option>
+        <option value="medium">200 - 400</option>
+        <option value="medium">400 - 600</option>
+        <option value="medium">600 - 800</option>
+        <option value="high">Above 1000</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="sortOption">Sort By:</label>
+      <select id="sortOption">
+        <option value="default">Default</option>
+        <option value="priceLowHigh">Price: Low → High</option>
+        <option value="priceHighLow">Price: High → Low</option>
+        <option value="ratingHighLow">Rating: High → Low</option>
+      </select>
+    </div>
+  </section>
+
+  <main id="productContainer" class="product-grid"></main>
+
+  <footer>
+    <p></p>
+  </footer>
+
+  <script src="script3.js"></script>
+</body>
+</html>

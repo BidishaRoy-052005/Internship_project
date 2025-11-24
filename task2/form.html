@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Contact Form</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #b2fce4, #7dd3fc);
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            width: 420px;
+            background: #ffffffcc;
+            backdrop-filter: blur(10px);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0px 8px 25px rgba(0,0,0,0.15);
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            text-align: center;
+            color: #065f46;
+            margin-bottom: 25px;
+            font-size: 26px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 14px 12px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            background: transparent;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #10b981;
+            box-shadow: 0 0 8px #10b98180;
+        }
+
+        /* Floating labels */
+        .input-group label {
+            position: absolute;
+            left: 14px;
+            top: 14px;
+            color: #6b7280;
+            pointer-events: none;
+            transition: 0.3s ease;
+            background: #fff;
+            padding: 0 6px;
+        }
+
+        input:focus + label,
+        input:not(:placeholder-shown) + label,
+        textarea:focus + label,
+        textarea:not(:placeholder-shown) + label {
+            top: -10px;
+            font-size: 12px;
+            color: #10b981;
+        }
+
+        textarea {
+            resize: none;
+            height: 110px;
+        }
+
+        /* Button styling */
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            background: #10b981;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s ease;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #059669;
+            transform: scale(1.03);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        /* Error messages */
+        .error-message {
+            color: #b91c1c;
+            font-size: 13px;
+            margin-top: 4px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .success {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 18px;
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Contact Us</h2>
+
+        <div id="successMessage" class="success">Your message has been sent! </div>
+
+        <form id="contactForm">
+
+            <div class="input-group">
+                <input type="text" id="name" placeholder=" " />
+                <label for="name">Full Name</label>
+                <div id="nameError" class="error-message">Please enter your name.</div>
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="email" placeholder=" " />
+                <label for="email">Email Address</label>
+                <div id="emailError" class="error-message">Please enter a valid email.</div>
+            </div>
+
+            <div class="input-group">
+                <textarea id="message" placeholder=" "></textarea>
+                <label for="message">Message</label>
+                <div id="messageError" class="error-message">Message cannot be empty.</div>
+            </div>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById("contactForm");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let valid = true;
+
+            // Inputs
+            const name = document.getElementById("name");
+            const email = document.getElementById("email");
+            const message = document.getElementById("message");
+
+            // Error sections
+            const nameError = document.getElementById("nameError");
+            const emailError = document.getElementById("emailError");
+            const messageError = document.getElementById("messageError");
+            const success = document.getElementById("successMessage");
+
+            // Reset previous messages
+            nameError.style.display = "none";
+            emailError.style.display = "none";
+            messageError.style.display = "none";
+            success.style.display = "none";
+
+            // Validate name
+            if (name.value.trim() === "") {
+                nameError.style.display = "block";
+                valid = false;
+            }
+
+            // Validate email
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email.value.trim())) {
+                emailError.style.display = "block";
+                valid = false;
+            }
+
+            // Validate message
+            if (message.value.trim() === "") {
+                messageError.style.display = "block";
+                valid = false;
+            }
+
+            // If valid
+            if (valid) {
+                success.style.display = "block";
+                form.reset();
+            }
+        });
+    </script>
+
+</body>
+</html>
